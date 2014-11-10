@@ -1,0 +1,227 @@
+<xs:schema targetNamespace="http://www.imsglobal.org/xsd/imsld_v1p0" xmlns="http://www.imsglobal.org/xsd/imsld_v1p0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="IMS LD Level B version 1.0 Final Draft">
+	<!--
+		IPR, License and Distribution Notices
+		This machine readable file is derived from IMS specification IMS Learning Design XML Binding Version 1.0 Final Specification 
+		found at http://www.imsglobal.org/learningdesign/ and the original IMS schema binding or code base 
+		http://www.imsglobal.org/learningdesign/ldv1p0/imsld_bindv1p0.html.
+		
+		Recipients of this document are requested to submit, with their comments, notification of any relevant patent 
+		claims or other intellectual property rights of which they may be aware that might be infringed by the schema 
+		binding contained in this document.
+		
+		IMS takes no position regarding the validity or scope of any intellectual property or other rights that might be 
+		claimed to pertain to the implementation or use of the technology described in this document or the extent to 
+		which any license under such rights might or might not be available; neither does it represent that it has made 
+		any effort to identify any such rights. Information on IMS’s procedures with respect to rights in IMS specifications 
+		can be found at the IMS Intellectual Property Rights web page: http://www.imsglobal.org/ipr/imsipr_policyFinal.pdf.
+		
+		Copyright © IMS Global Learning Consortium 1999-2007. All Rights Reserved.
+		
+		License Notice for Users
+		Users of products or services that include this document are hereby granted a worldwide, royalty-free, 
+		non-exclusive license to use this document.
+		
+		Distribution Notice for Developers
+		Developers of products or services that provide distribution of this document as is or with modifications are 
+		required to register with the IMS community on the IMS website as described in the following two paragraphs:
+		
+		- If you wish to distribute this document as is, with no modifications, you are hereby granted permission to copy, 
+		display and distribute the contents of this document in any medium for any purpose without fee or royalty provided 
+		that you include this IPR, License and Distribution notice in its entirety on ALL copies, or portions thereof, that you 
+		make and you complete a valid license registration with IMS and receive an email from IMS granting the license. 
+		To register, follow the instructions on the IMS website: http://www.imsglobal.org/specificationdownload.cfm. Once 
+		registered you are granted permission to transfer unlimited distribution rights of this document for the purposes 
+		of third-party or other distribution of your product or service that incorporates this document as long as this IPR, 
+		License and Distribution notice remains in place in its entirety.
+		
+		- If you wish to create and distribute a derived work from this document, you are hereby granted permission to copy, 
+		display and distribute the contents of the derived work in any medium for any purpose without fee or royalty provided 
+		that you include this IPR, License and Distribution notice in its entirety on ALL copies, or portions thereof, that you 
+		make and you complete a valid profile registration with IMS and receive an email from IMS granting the license. To 
+		register, follow the instructions on the IMS website: http://www.imsglobal.org/profile/. Once registered you are 
+		granted permission to transfer unlimited distribution rights of the derived work for the purposes of third-party or 
+		other distribution of your product or service that incorporates the derived work as long as this IPR, License and 
+		Distribution notice remains in place in its entirety.
+		
+		The limited permissions granted above are perpetual and will not be revoked by IMS or its successors or assigns.
+		
+		THIS SPECIFICATION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
+		ANY WARRANTY OF NONINFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS SPECIFICATION 
+		SHALL BE MADE ENTIRELY AT THE IMPLEMENTER’S OWN RISK, AND NEITHER THE CONSORTIUM, NOR 
+		ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER 
+		OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING 
+		FROM THE USE OF THIS SPECIFICATION.
+	-->
+	<xs:annotation>
+		<xs:documentation>This module contains the elements that constitute the expression schema that is used in IMS LD. 
+		The module must be included in level B of the IMS LD specifications.
+		This module can not be used independently, because it makes use of several IMS LD elements and attributes.
+		Changed the namespace.
+		</xs:documentation>
+	</xs:annotation>
+	
+	<!-- ******************** -->
+	<!-- ** Change History ** -->
+	<!-- ******************** -->
+	<xs:annotation>
+		<xs:documentation>4 November 2002
+		Created module.
+		</xs:documentation>
+	</xs:annotation>
+	
+	<!-- ***************************** -->
+	<!-- **Re-usable content models ** -->
+	<!-- ***************************** -->
+	<xs:group name="grp.operand">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This model consists of the operands used in the expression.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="property-ref"/>
+			<xs:element ref="property-value"/>
+			<xs:group ref="grp.expression"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.calculate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This model consists of the operands and expressions used in the expression. This model is used in several elements.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="grp.operand" minOccurs="2" maxOccurs="2"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.expression">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This model consists of operator elements that can be used to build expressions. This model is used in several elements.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="is-member-of-role"/>
+			<xs:element ref="is"/>
+			<xs:element ref="is-not"/>
+			<xs:element ref="and"/>
+			<xs:element ref="or"/>
+			<xs:element ref="sum"/>
+			<xs:element ref="subtract"/>
+			<xs:element ref="multiply"/>
+			<xs:element ref="divide"/>
+			<xs:element ref="greater-than"/>
+			<xs:element ref="less-than"/>
+			<xs:element ref="users-in-role"/>
+			<xs:element ref="no-value"/>
+			<xs:element ref="time-unit-of-learning-started"/>
+			<xs:element ref="datetime-activity-started"/>
+			<xs:element ref="current-datetime"/>
+			<xs:element ref="complete"/>
+			<xs:element ref="not"/>
+		</xs:choice>
+	</xs:group>
+	
+	<!-- ************************** -->
+	<!-- ** Element declarations ** -->
+	<!-- ************************** -->
+	<xs:element name="is" type="calculateType"/>
+	<xs:element name="is-not" type="calculateType"/>
+	<xs:element name="and" type="operatorType"/>
+	<xs:element name="or" type="operatorType"/>
+	<xs:element name="sum" type="sumType"/>
+	<xs:element name="subtract" type="calculateType"/>
+	<xs:element name="multiply" type="calculateType"/>
+	<xs:element name="divide" type="calculateType"/>
+	<xs:element name="greater-than" type="calculateType"/>
+	<xs:element name="less-than" type="calculateType"/>
+	<xs:element name="users-in-role" type="users-in-roleType"/>
+	<xs:element name="no-value" type="no-valueType"/>
+	<xs:element name="complete" type="completeType"/>
+	<xs:element name="not" type="expressionType"/>
+
+	<!-- *********** -->
+	<!-- ** Empty ** -->
+	<!-- *********** -->
+	<xs:element name="current-datetime">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This refers to a system variable when implementing IMS LD. The system should return a variable of type dateTime, holding the current date and time.</xs:documentation>
+			<xs:appinfo>Return a variable of type dateTime.</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	
+	<!-- *************************** -->
+	<!-- ** Empty with attributes ** -->
+	<!-- *************************** -->
+	<xs:element name="is-member-of-role">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="time-unit-of-learning-started">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This refers to a system variable when implementing IMS LD. The system should return a variable of type dateTime.</xs:documentation>
+			<xs:appinfo>Return a variable of type dateTime</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="unit-of-learning-uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="datetime-activity-started">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This refers to a system variable when implementing IMS LD. The system should return a variable of type dateTime.</xs:documentation>
+			<xs:appinfo>Return a variable of type dateTime</xs:appinfo>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="role-part-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="act-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- ******************* -->
+	<!-- ** Complex types ** -->
+	<!-- ******************* -->
+	<xs:complexType name="calculateType">
+		<xs:group ref="grp.calculate"/>
+	</xs:complexType>
+	<xs:complexType name="expressionType">
+		<xs:group ref="grp.expression"/>
+	</xs:complexType>
+	<xs:complexType name="operatorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">This model is used in the elements 'and' and 'or'.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="grp.expression" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sumType">
+		<xs:group ref="grp.calculate" maxOccurs="unbounded"/>
+	</xs:complexType>
+	<xs:complexType name="users-in-roleType">
+		<xs:sequence>
+			<xs:element ref="role-ref"/>
+			<xs:element ref="expression"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="no-valueType">
+		<xs:sequence>
+			<xs:element ref="property-ref"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="completeType">
+		<xs:choice>
+			<xs:element ref="learning-activity-ref"/>
+			<xs:element ref="support-activity-ref"/>
+			<xs:element ref="unit-of-learning-href"/>
+			<xs:element ref="activity-structure-ref"/>
+			<xs:element ref="role-part-ref"/>
+			<xs:element ref="act-ref"/>
+			<xs:element ref="play-ref"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

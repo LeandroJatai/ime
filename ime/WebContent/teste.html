@@ -1,0 +1,1485 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/ime/js/jquery.min.js"></script>
+<script type="text/javascript" src="/ime/js/jquery.caret.1.02.js"></script>
+<script type="text/javascript" src="/ime/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="/ime/js/ckeditor/ckeditor.js"></script>
+
+
+<script type="text/javascript" src="/ime/av/js/ime.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/ime/av/css/ime.css">
+
+
+
+<title>IME - Instructional Model Environment</title>
+
+</head>
+<body>
+
+
+	      
+
+
+
+
+
+
+
+
+<div id="globalCab">
+
+<span style="font-size:9pt; "><a href="#" class="titulo" title="IME - Instructional Model Environment">IME - Instructional Model Environment</a></span>
+	 
+         <a class="titulo" style="font-size:9pt; float:right;" href="/ime/usuario.do?action=usuario_logout">[Sair]</a>
+         
+          <span class="titulo" style="font-size: 8pt;color:#ff0; float: right; padding-top: 2px;"><a  style="font-size: 8pt;color:#ff0;" href="/ime/usuario.do?action=manage.users.perspectiva
+         ">Leandro Roberto</a></span> 
+
+         
+    
+
+
+</div>
+<div id="globalTop">
+		<a class="menu " href="/ime/">&nbsp;[Área de Trabalho]</a>
+		
+	
+	<a class="menu " href="/ime/app.do?action=ldep.database.list.owner"> &nbsp;[Meus Projetos]</a>
+	
+    
+	<a class="menu " href="/ime/app.do?action=ldep.database.list.publicos"> &nbsp;[Projetos Públicos]</a>
+	
+    
+	<a class="menu" style="float: right;  font-size: 80% " href="/ime/usuario.do?action=manage.users">[Usuários] &nbsp;</a>
+	
+    
+	<a class="menu" style="float: right;  font-size: 80% " href="/ime/lang.do?action=manage.language">[Linguagens] &nbsp;</a>
+	 
+    
+	<a class="menu" style="float: right;  font-size: 80% " href="/ime/av?action=manage.arquivo">[Arquivos] &nbsp;</a>
+	
+    
+    
+	<a class="menu selected right"  style="font-size: 80%;" href="/ime/usuario.do?action=manage.users.perspectiva.open" title="Perspectiva padrão do usuário configurada pelo gestor de usuários." >[Perspectiva Padrão] &nbsp;</a>
+	
+	
+	<span class="right" style="font-size: 80%;">
+		
+			<a class="menu " href="/ime/usuario.do?action=manage.users.perspectiva.open&idPerspectiva=10" title="Perspectiva criada pelo próprio usuário" >[Professor U] &nbsp;</a>
+	
+			
+			<a class="menu " href="/ime/usuario.do?action=manage.users.perspectiva.open&idPerspectiva=11" title="Perspectiva criada pelo próprio usuário" >[Professor A] &nbsp;</a>
+	
+			
+			<a class="menu " href="/ime/usuario.do?action=manage.users.perspectiva.open&idPerspectiva=14" title="Perspectiva criada pelo próprio usuário" >[EA en_US] &nbsp;</a>
+	
+			
+			<a class="menu " href="/ime/usuario.do?action=manage.users.perspectiva.open&idPerspectiva=15" title="Perspectiva criada pelo próprio usuário" >[Convidado] &nbsp;</a>
+	
+			
+    </span>
+</div>
+
+	
+<div id="panelWait">Carregando Informações e construíndo interface...</div>
+<div id="globalWorks">
+
+	 
+
+
+
+ 
+<script type="text/javascript">
+
+roleText = 'Papeis';
+envText = 'Ambientes';
+activityText = 'Atividades';
+rpText = 	'Role Partes';
+</script>   	
+<div id="globalBottom">
+	<div id="cTree"></div>
+		
+</div>	
+	 
+
+
+	
+	<div id="RightPane" style="left: 470px;">
+	
+		   
+		   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="/ime/environment.do" method="post">
+	<fieldset>
+		
+		<legend>
+			__Serviço de Conferência do Ambiente <b>amb</b>
+		</legend>
+		
+
+
+
+		<img style="float: left; padding: 7px 7px 0px 0px;"
+			src="/ime/av/imgs/ime/sv.png" />
+
+		<fieldset>
+			<legend>Título / Descrição</legend>
+			<label style="float: right; margin-right: 10px;"><input
+				style="float: left;" name="sv.isvisible" type="checkbox"
+				checked>Visível</label>
+
+
+
+			<label style="display: block; margin-right: 192px;"> <input
+				type="text" name="sv.title" tabindex="5"
+				value="teste"
+				style="width: 100%;" /></label>
+
+		</fieldset>
+
+		<fieldset class="right">
+			<legend>Classe</legend>
+			<label style="display: block; margin-right: 10px;"><input
+				type="text" name="sv.clazz" tabindex="10"
+				value=""
+				style="width: 100%;" /></label>
+		</fieldset>
+
+
+
+		<fieldset>
+			<legend>Parâmetro do Serviço</legend>
+			<label style="display: block; margin-right: 10px;"><input
+				type="text" name="sv.parameters" tabindex="10"
+				value=""
+				style="width: 100%;" /></label>
+		</fieldset>
+
+
+	</fieldset>
+
+	<fieldset class="controles">
+		
+		<label><input type="submit"
+			value="Guardar"></label>
+		
+
+		
+		<a
+			href="environment.do?type=send.mail&action=env.sv.edit.new&id-env=env-1&ldep=ldep-1">[Novo Serviço de e-mail]</a>
+		<a
+			href="environment.do?type=conference&action=env.sv.edit.new&id-env=env-1&ldep=ldep-1">[Novo Serviço de Conferência]</a>
+		<a
+			href="environment.do?type=index.search&action=env.sv.edit.new&id-env=env-1&ldep=ldep-1">[Novo Serviço de Busca]</a>
+		
+
+	</fieldset>
+
+	
+	
+
+	<fieldset>
+		<legend>Tipo da Conferênncia</legend>
+		<label><input type="radio" name="sv.type.conference"
+			value="synchronous" tabindex="20"
+			checked />Síncrono</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label><input type="radio" name="sv.type.conference"
+			value="asynchronous" tabindex="20"
+			 />Assíncrono</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label><input type="radio" name="sv.type.conference"
+			value="announcement" tabindex="20"
+			 />Anúncio/Aviso</label>&nbsp;&nbsp;&nbsp;&nbsp;
+	</fieldset>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+    <fieldset class="right">
+    <legend>Gerente da Conferência</legend>
+    
+    <fieldset>
+    <legend>Aprendiz</legend>
+    
+    
+		
+
+		<label class="list">
+		
+		 <input type="radio" name="conf.manager" value="learner-1" />Aluno</label>
+
+		
+    
+    
+    </fieldset>
+    
+    <fieldset>
+    <legend>Equipe de Apoio</legend>   
+    
+		
+
+		<label class="list">
+ 
+		 <input type="radio" name="conf.manager" value="staff-1" />Professor</label>
+	
+		
+    
+    
+    
+    </fieldset>
+    
+    
+    </fieldset>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+    <fieldset class="right">
+    <legend>Moderador</legend>
+    
+    <fieldset>
+    <legend>Aprendiz</legend>
+    
+    
+		
+
+		<label class="list">
+		
+		 <input type="radio" name="moderator" value="learner-1" />Aluno</label>
+
+		
+    
+    
+    </fieldset>
+    
+    <fieldset>
+    <legend>Equipe de Apoio</legend>   
+    
+		
+
+		<label class="list">
+ 
+		 <input type="radio" name="moderator" value="staff-1" />Professor</label>
+	
+		
+    
+    
+    
+    </fieldset>
+    
+    
+    </fieldset>
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+    <fieldset class="right">
+    <legend>Observadores</legend>
+    
+    <fieldset>
+    <legend>Aprendiz</legend>
+    
+    
+	
+
+		<label class="list">
+		
+		 <input type="checkbox"
+			name="observers" value="learner-1" />Aluno</label>
+
+		
+    
+    
+    </fieldset>
+    
+    <fieldset>
+    <legend>Equipe de Apoio</legend>   
+    
+    
+
+		<label class="list">
+ 
+		 <input type="checkbox"
+			name="observers" value="staff-1" />Professor</label>
+
+		
+    
+    
+    
+    </fieldset>
+    
+    
+    </fieldset>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    
+    <fieldset>
+    <legend>Participantes</legend>
+    
+    <fieldset>
+    <legend>Aprendiz</legend>
+    
+    
+	
+
+		<label class="list">
+ 
+		
+			
+		<input type="checkbox" name="participantes" value="learner-1" checked />Aluno</label>
+
+		
+    
+    
+    </fieldset>
+    
+    <fieldset>
+    <legend>Equipe de Apoio</legend>   
+    
+    
+
+		<label class="list">
+ 
+		 <input type="checkbox"
+			name="participantes" value="staff-1" />Professor</label>
+
+		
+    
+    
+    
+    </fieldset>
+    
+    
+    </fieldset>
+
+
+
+	
+	
+
+
+	<input type="hidden" name="type" value="conference" /> <input
+		type="hidden" name="ldep"
+		value="ldep-1" /> <input
+		type="hidden" name="id-env"
+		value="env-1" /> <input
+		type="hidden" name="identifier"
+		value="sv-3" /> <input
+		type="hidden" name="action" value="env.sv.save" />
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   	   
+  <form action="/ime/environment.do" method="post" enctype="multipart/form-data"> 
+  
+
+  
+ <fieldset>	
+	 <legend>Item</legend>
+			 
+
+
+		 
+		<a class="controls-objs " href="environment.do?action=env.sv.edit&id-env=env-1&ldep=ldep-1&identifier=sv-3&type-item=text" title="Adicionar novo Texto/Html">[T]</a>
+		<a class="controls-objs " href="environment.do?action=env.sv.edit&id-env=env-1&ldep=ldep-1&identifier=sv-3&type-item=link" title="Adicionar novo Link">[L]</a>
+		<a class="controls-objs " href="environment.do?action=env.sv.edit&id-env=env-1&ldep=ldep-1&identifier=sv-3&type-item=file" title="Adicionar novo Arquivo">[F]</a>
+<br> <br>	
+	 
+
+				  </form>
+				  
+				  
+				
+
+
+s
+		</div>
+
+
+</div>
+<div id="LeftPane" style="width: 470px;">
+
+	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul  id="raizMIEdition" 
+	class="arvoreRaiz moveLdep">
+
+	 
+
+	<li id="ldepId-1" onmouseover="liHover(event, 0);" onmouseout="liOut(event);"><a 
+		class="arvoreMenos"
+		href="app.do?action=ldep.ftv&identifier=ldep-1">
+	</a>  
+	
+	
+             
+            
+
+   	<img src="/ime/imgs/iconError14.png">
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   
+              
+		    
+		    
+		<a
+		class="selected  "
+		href="app.do?action=ldep.edit&ldep=ldep-1">
+		
+		
+		MI - Básico<b style="font-size: 120%;" title="Últimas alterações ainda não guardas no repositório.">* </b></a>
+
+
+ 		
+ 
+		
+			
+ 
+
+		<ul >
+		
+		
+			<li>
+			<a class="arvoreMenos" href="app.do?action=ldep.ftv"> </a><a
+				href="#">Componentes</a>
+				<ul>
+					
+					
+				
+					<li onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+						<a class="arvoreMenos" href="#"> </a>
+						<a href="roles.do?action=roles.list&ldep=ldep-1">Papeis</a>
+ 						
+ 					  
+            		
+
+   	<img src="/ime/imgs/iconError14.png">
+
+ 						
+							<span style="float: right; padding-right: 5px;">
+							    <a class="controls" href="/ime/roles.do?action=roles.edit.new&ldep=ldep-1"
+								title="Adicionar">[+]</a>
+							</span>
+						
+					
+						<ul>
+							<li><a
+								class="arvoreMenos"
+								href="#"> </a> <a
+								href="roles.do?action=roles.list&ldep=ldep-1">Aprendiz</a>
+								<ul>
+									
+									<li onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+									
+									<a class="learner "
+										href="roles.do?action=roles.edit&ldep=ldep-1&identifier=learner-1">Aluno</a>
+										
+							        	
+        								
+
+   	<img src="/ime/imgs/iconError14.png">
+
+									    
+										
+										
+										<span class="learner" style="float: right; padding-right: 5px;">
+										<a
+											class="controls"
+											href="roles.do?action=roles.remove&identifier=learner-1&ldep=ldep-1"
+											title="Excluir Papel">[-]</a></span> 
+											
+										</li>
+									
+								</ul></li>
+								
+							<li><a
+								class="arvoreMenos"
+								href="#"> </a><a
+								href="roles.do?action=roles.list&ldep=ldep-1">Equipe de Apoio</a>
+
+								<ul>
+									
+									<li onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="staff "
+										href="roles.do?action=roles.edit&ldep=ldep-1&identifier=staff-1">Professor</a>
+										
+										
+        								
+
+											
+										
+										<span class="staff"  style="float: right; padding-right: 5px;"><a
+											class="controls"
+											href="roles.do?action=roles.remove&identifier=staff-1&ldep=ldep-1"
+											title="Excluir Papel">[-]</a></span> 
+											
+											</li>
+									
+								</ul></li>
+
+						</ul></li>
+						
+						
+				
+					<li onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+						<a class="arvoreMenos" href="#"> </a>
+						<a href="activities.do?action=activities.list&ldep=ldep-1">Atividades</a>
+ 						
+ 						
+ 						
+            			
+
+   	<img src="/ime/imgs/iconError14.png">
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   
+ 						
+ 							<span style="float: right; padding-right: 5px;">
+							    <a class="controls" href="/ime/activities.do?action=activities.edit&ldep=ldep-1"
+								title="Nova Atividade">[+]</a>
+							</span>
+						
+						<ul>
+
+							<li><a class="arvoreMenos" href="app.do?action=ldep.ftv">
+							</a><a href="activities.do?action=activities.list&ldep=ldep-1">Atividades de Aprendizagem</a>
+								<ul>
+									
+									<li class="activities"  onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="learning-activity "
+										href="activities.do?action=activities.edit.la&ldep=ldep-1&identifier=activityla-1">Atividade Básica</a>
+										
+										    
+            								
+
+   	<img src="/ime/imgs/iconError14.png">
+
+          
+										
+										    <span class="activities" style="float: right; padding-right: 5px;"><a
+											class="controls"
+											href="activities.do?action=activities.remove&identifier=activityla-1&ldep=ldep-1"
+											title="Excluir Atividade">[-]</a></span>
+										
+											</li>
+									
+								</ul></li>
+							<li><a class="arvoreMenos" href="app.do?action=ldep.ftv">
+							</a><a
+								href="activities.do?action=activities.list&ldep=ldep-1">Atividades de Suporte</a>
+								<ul>
+									
+									<li class="activities" onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="support-activity "
+										href="activities.do?action=activities.edit.sa&ldep=ldep-1&identifier=activitysa-1">Apoio</a>
+										
+										             
+           											 
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   
+										
+										    <span class="activities"  style="float: right; padding-right: 5px;"><a
+											class="controls"
+											href="activities.do?action=activities.remove&identifier=activitysa-1&ldep=ldep-1"
+											title="Excluir Atividade de Suporte">[-]</a></span>
+										
+										</li>
+									
+								</ul></li>
+							<li><a class="arvoreMenos" href="app.do?action=ldep.ftv">
+							</a><a
+								href="activities.do?action=activities.list&ldep=ldep-1">Estruturas de Atividade</a>
+								<ul>
+									
+									<li class="activities" onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="activity-structure "
+										href="activities.do?action=activities.edit.as&ldep=ldep-1&identifier=activityas-1">Estrutura</a>
+										
+										             
+         								   
+
+   	<img src="/ime/imgs/iconError14.png">
+
+										
+										    <span class="activities" style="float: right; padding-right: 5px;"><a
+											class="controls"
+											href="activities.do?action=activities.remove&identifier=activityas-1&ldep=ldep-1"
+											title="Excluir Estrutura de Atividade">[-]</a></span>
+										
+										
+										</li>
+									
+								</ul></li>
+
+						</ul></li>
+						
+				
+					<li onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+					<a class="arvoreMenos" href="app.do?action=ldep.ftv">
+					</a>
+					<a href="environment.do?action=environment.list&ldep=ldep-1">Ambientes</a>
+					     
+							<span style="float: right; padding-right: 5px;">
+							    <a class="controls" href="/ime/environment.do?action=environment.edit.new&ldep=ldep-1"
+								title="Novo Ambiente">[+]</a>
+							</span>
+							
+						<ul>
+						    
+							<li class="environment" onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+							<a	class="environment-link"
+								href="environment.do?action=environment.edit&ldep=ldep-1&identifier=env-1">amb
+								
+   	
+   											             
+           											 
+
+   	<img src="/ime/imgs/iconError14.png">
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   </a>
+								
+								
+		   						 
+									<span class="environment" style="float: right; padding-right: 5px;"><a
+										class="controls"
+										href="environment.do?action=environment.remove&identifier=env-1&ldep=ldep-1"
+										title="Excluir Ambiente">[-]</a>
+									</span>
+								
+								
+								 
+								
+								<ul>
+								    
+									<li  onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="learningObjects "
+										href="environment.do?action=env.lo.edit&ldep=ldep-1&identifier=lo-1&id-env=env-1"></a>
+										
+										             
+           											 
+
+   	<img src="/ime/imgs/iconError14.png">
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   										
+				   						 
+											<span class="learningObjects" style="float: right; padding-right: 5px;"><a
+												class="controls"
+												href="environment.do?action=env.lo.remove&identifier=lo-1&ldep=ldep-1&id-env=env-1"
+												title="Excluir Objeto de Aprendizagem">[-]</a>
+											</span>
+												
+										</li>
+									
+								</ul>
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-1&id-env=env-1"></a>
+										
+													 
+           											 
+
+   	<img src="/ime/imgs/iconWarning14.png">
+   
+				   						 
+											<span class="services" style="float: right; padding-right: 5px;"><a
+												class="controls"
+												href="environment.do?action=env.sv.remove&identifier=sv-1&ldep=ldep-1&id-env=env-1"
+												title="Excluir Serviço">[-]</a>
+											</span>
+												
+										</li>
+									
+									<li  onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-2&id-env=env-1">serviço de conferência 1</a>
+										
+													 
+           											 
+
+				   						 
+											<span class="services" style="float: right; padding-right: 5px;"><a
+												class="controls"
+												href="environment.do?action=env.sv.remove&identifier=sv-2&ldep=ldep-1&id-env=env-1"
+												title="Excluir Serviço">[-]</a>
+											</span>
+												
+										</li>
+									
+									<li  onmouseover="liHover(event, 1);" onmouseout="liOut(event);"><a
+										class="services selectedEdit"
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-3&id-env=env-1">teste</a>
+										
+													 
+           											 
+
+   	<img src="/ime/imgs/iconError14.png">
+
+				   						 
+											<span class="services" style="float: right; padding-right: 5px;"><a
+												class="controls"
+												href="environment.do?action=env.sv.remove&identifier=sv-3&ldep=ldep-1&id-env=env-1"
+												title="Excluir Serviço">[-]</a>
+											</span>
+												
+										</li>
+									
+								</ul>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								</li>
+							
+						</ul></li>
+				</ul></li>
+			
+			<li onmouseover="liHover(event, 0);" onmouseout="liOut(event);">
+			<a class="arvoreMenos" href="app.do?action=ldep.ftv"> </a>
+			<a href="play.do?action=play.list&ldep=ldep-1">Método</a>
+			
+			
+				<ul class="movePlays ">
+					
+					<li id="playId-2-ldepId-1"
+						onmouseover="liHover(event, 4);" onmouseout="liOut(event);">
+						   <a class="arvoreMenos" href="app.do?action=ldep.ftv"> </a>
+						   
+						   <a class="plays "
+							  href="play.do?action=play.edit&identifier=play-1&ldep=ldep-1">Curso</a>
+						
+						
+						<span style="float: right; padding-right: 5px;">
+						   <a class="controls"
+							  href="play.do?action=play.remove&identifier=play-1&ldep=ldep-1"
+							 title="Excluir Peça">[-]</a></span>
+						
+						<span style="float: right; padding-right: 5px;">
+						   <a class="controls"
+							  href="play.do?action=play.edit.new&ldep=ldep-1"
+							  title="Adicionar Nova Peça">[+]</a></span>
+						
+						<span style="float: right; padding-right: 5px;"> <a class="controls"
+							  href="/ime/act.do?action=act.new.for.mi&play-ref=play-1&ldep=ldep-1"
+						     title="Adicionar composição de Mi's">[+mi]</a></span>	
+						
+							<span style="float: right; padding-right: 5px;"> <a class="controls"
+								  href="/ime/act.do?action=act.edit.new&play-ref=play-1&ldep=ldep-1"
+							           title="Adicionar Ato">[+act]</a></span>
+						
+						
+						<ul class="moveActs">
+
+							
+							<li id="actId-3-playId-2-ldepId-1" 
+							    onmouseover="liHover(event, 2);" onmouseout="liOut(event);">
+									
+								<a class="arvoreMenos rp" href="app.do?action=ldep.ftv"> </a>
+								
+								<a class="acts " href="act.do?action=act.edit&identifier=act-1&play-ref=play-1&ldep=ldep-1">Capítulo do Curso</a>
+								
+								
+								
+								<span style="float: right; padding-right: 5px;">
+								    <a class="controls"
+									   href="act.do?action=act.remove&identifier=act-1&play-ref=play-1&ldep=ldep-1"
+									  title="Excluir Ato">[-]</a></span>
+							    </span>
+							    
+								
+								<span style="float: right; padding-right: 5px;">
+								    <a class="controls"
+									   href="/ime/rp.do?action=rp.edit.new&act-ref=act-1&ldep=ldep-1"
+									  title="Adicionar nova Role-Part">[+rp]</a></span>	
+							    </span>
+							    
+								
+								<ul class="moveRPs">
+
+							
+							<li class="rp"
+								id="rpId-4-actId-3-playId-2-ldepId-1"
+								onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+
+								
+								<span class="right" style="padding-right: 5px;"><a
+									class="learner controls"
+									href="roles.do?action=roles.edit&ldep=ldep-1&identifier=learner-1">Aluno</a></span>
+								
+										 <a
+								class="rp "
+								href="rp.do?action=rp.edit&identifier=rp-2&act-ref=act-1&ldep=ldep-1">Aula</a>
+
+								<ul>
+
+									
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+	<li class="activities"  onmouseover="liHover();" onmouseout="liOut();">
+	   <a class=" learning-activity"
+		href="activities.do?action=activities.edit.la&ldep=ldep-1&identifier=activityla-1">Atividade Básica</a>
+			
+	
+										
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+			<ul>
+				
+				    
+					<li  class="environment" onmouseover="liHover();" onmouseout="liOut();">
+					   
+					     <a class="environment-link"
+						href="environment.do?action=environment.edit&ldep=ldep-1&identifier=env-1">amb</a>
+						 <span class="environment right"> </span>
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="learningObjects "
+										href="environment.do?action=env.lo.edit&ldep=ldep-1&identifier=lo-1&id-env=env-1"></a>
+									</li>
+									
+								</ul>
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-1&id-env=env-1"></a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-2&id-env=env-1">serviço de conferência 1</a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services selectedEdit"
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-3&id-env=env-1">teste</a>
+										
+											
+										</li>
+									
+								</ul>
+								
+								
+								
+								
+								
+								
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+					</li>
+				
+			</ul>
+	</li> 
+
+
+
+								
+
+
+								</ul>
+							</li>
+							
+							<li class="rp"
+								id="rpId-5-actId-3-playId-2-ldepId-1"
+								onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+
+								
+								<span class="right" style="padding-right: 5px;"><a
+									class="staff controls"
+									href="roles.do?action=roles.edit&ldep=ldep-1&identifier=staff-1">Professor</a></span>
+								
+										 <a
+								class="rp "
+								href="rp.do?action=rp.edit&identifier=rp-1&act-ref=act-1&ldep=ldep-1">Apoio a aula</a>
+
+								<ul>
+
+									
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+	<li class="activities"  onmouseover="liHover();" onmouseout="liOut();">
+	
+	   <a class="support-activity "
+		href="activities.do?action=activities.edit.sa&ldep=ldep-1&identifier=activitysa-1">Apoio</a>
+			
+			<ul>
+			    
+				    
+					<li class="learner staff" onmouseover="liHover();" onmouseout="liOut();">
+					   <a class="staff "
+						href="roles.do?action=roles.edit&ldep=ldep-1&identifier=staff-1">Professor</a>
+						<span class="staff right"> </span>
+					</li>
+				
+			</ul>
+			
+										
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+			<ul>
+				
+				    
+					<li  class="environment" onmouseover="liHover();" onmouseout="liOut();">
+					   
+					     <a class="environment-link"
+						href="environment.do?action=environment.edit&ldep=ldep-1&identifier=env-1">amb</a>
+						 <span class="environment right"> </span>
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="learningObjects "
+										href="environment.do?action=env.lo.edit&ldep=ldep-1&identifier=lo-1&id-env=env-1"></a>
+									</li>
+									
+								</ul>
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-1&id-env=env-1"></a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-2&id-env=env-1">serviço de conferência 1</a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services selectedEdit"
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-3&id-env=env-1">teste</a>
+										
+											
+										</li>
+									
+								</ul>
+								
+								
+								
+								
+								
+								
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+					</li>
+				
+			</ul>
+						
+			
+	</li> 
+	
+
+								
+
+
+								</ul>
+							</li>
+							
+							<li class="rp"
+								id="rpId-6-actId-3-playId-2-ldepId-1"
+								onmouseover="liHover(event, 1);" onmouseout="liOut(event);">
+
+								
+								<span class="right" style="padding-right: 5px;"><a
+									class="learner controls"
+									href="roles.do?action=roles.edit&ldep=ldep-1&identifier=learner-1">Aluno</a></span>
+								
+										 <a
+								class="rp "
+								href="rp.do?action=rp.edit&identifier=rp-3&act-ref=act-1&ldep=ldep-1">teste</a>
+
+								<ul>
+
+									
+									
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+	<li class="activities" onmouseover="liHover();" onmouseout="liOut();">
+	   <a class="activity-structure "
+		href="activities.do?action=activities.edit.as&ldep=ldep-1&identifier=activityas-1">Estrutura</a>
+			
+			
+			
+			
+										
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+			<ul>
+				
+				    
+					<li  class="environment" onmouseover="liHover();" onmouseout="liOut();">
+					   
+					     <a class="environment-link"
+						href="environment.do?action=environment.edit&ldep=ldep-1&identifier=env-1">amb</a>
+						 <span class="environment right"> </span>
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="learningObjects "
+										href="environment.do?action=env.lo.edit&ldep=ldep-1&identifier=lo-1&id-env=env-1"></a>
+									</li>
+									
+								</ul>
+								
+								
+								
+								
+								<ul>
+								    
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-1&id-env=env-1"></a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services "
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-2&id-env=env-1">serviço de conferência 1</a>
+										
+											
+										</li>
+									
+									<li  onmouseover="liHover();" onmouseout="liOut(event);"><a
+										class="services selectedEdit"
+										href="environment.do?action=env.sv.edit&ldep=ldep-1&identifier=sv-3&id-env=env-1">teste</a>
+										
+											
+										</li>
+									
+								</ul>
+								
+								
+								
+								
+								
+								
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+						 
+					</li>
+				
+			</ul>
+			
+			
+			<ul>
+				
+				
+				
+				
+				
+			</ul>
+	</li> 
+
+
+
+								
+
+
+								</ul>
+							</li>
+							
+						</ul></li>
+
+							
+
+
+						</ul></li>
+					
+
+				</ul>
+				
+ 
+				</li>
+
+		</ul>
+		
+		</li>
+
+	
+</ul>
+	
+	</div>
+	
+   <div id="vsplitbar" style="left: 470px;">
+    </div>	
+ 
+ 
+</body>
+</html>

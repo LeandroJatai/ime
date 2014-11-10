@@ -1,0 +1,143 @@
+<xs:schema targetNamespace="http://www.imsglobal.org/xsd/imsld_v1p0"  xmlns="http://www.imsglobal.org/xsd/imsld_v1p0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="IMS LD Level B global elements version 1.0 Final Draft">
+	<!--
+		IPR, License and Distribution Notices
+		This machine readable file is derived from IMS specification IMS Learning Design XML Binding Version 1.0 Final Specification 
+		found at http://www.imsglobal.org/learningdesign/ and the original IMS schema binding or code base 
+		http://www.imsglobal.org/learningdesign/ldv1p0/imsld_bindv1p0.html.
+		
+		Recipients of this document are requested to submit, with their comments, notification of any relevant patent 
+		claims or other intellectual property rights of which they may be aware that might be infringed by the schema 
+		binding contained in this document.
+		
+		IMS takes no position regarding the validity or scope of any intellectual property or other rights that might be 
+		claimed to pertain to the implementation or use of the technology described in this document or the extent to 
+		which any license under such rights might or might not be available; neither does it represent that it has made 
+		any effort to identify any such rights. Information on IMS’s procedures with respect to rights in IMS specifications 
+		can be found at the IMS Intellectual Property Rights web page: http://www.imsglobal.org/ipr/imsipr_policyFinal.pdf.
+		
+		Copyright © IMS Global Learning Consortium 1999-2007. All Rights Reserved.
+		
+		License Notice for Users
+		Users of products or services that include this document are hereby granted a worldwide, royalty-free, 
+		non-exclusive license to use this document.
+		
+		Distribution Notice for Developers
+		Developers of products or services that provide distribution of this document as is or with modifications are 
+		required to register with the IMS community on the IMS website as described in the following two paragraphs:
+		
+		- If you wish to distribute this document as is, with no modifications, you are hereby granted permission to copy, 
+		display and distribute the contents of this document in any medium for any purpose without fee or royalty provided 
+		that you include this IPR, License and Distribution notice in its entirety on ALL copies, or portions thereof, that you 
+		make and you complete a valid license registration with IMS and receive an email from IMS granting the license. 
+		To register, follow the instructions on the IMS website: http://www.imsglobal.org/specificationdownload.cfm. Once 
+		registered you are granted permission to transfer unlimited distribution rights of this document for the purposes 
+		of third-party or other distribution of your product or service that incorporates this document as long as this IPR, 
+		License and Distribution notice remains in place in its entirety.
+		
+		- If you wish to create and distribute a derived work from this document, you are hereby granted permission to copy, 
+		display and distribute the contents of the derived work in any medium for any purpose without fee or royalty provided 
+		that you include this IPR, License and Distribution notice in its entirety on ALL copies, or portions thereof, that you 
+		make and you complete a valid profile registration with IMS and receive an email from IMS granting the license. To 
+		register, follow the instructions on the IMS website: http://www.imsglobal.org/profile/. Once registered you are 
+		granted permission to transfer unlimited distribution rights of the derived work for the purposes of third-party or 
+		other distribution of your product or service that incorporates the derived work as long as this IPR, License and 
+		Distribution notice remains in place in its entirety.
+		
+		The limited permissions granted above are perpetual and will not be revoked by IMS or its successors or assigns.
+		
+		THIS SPECIFICATION IS BEING OFFERED WITHOUT ANY WARRANTY WHATSOEVER, AND IN PARTICULAR, 
+		ANY WARRANTY OF NONINFRINGEMENT IS EXPRESSLY DISCLAIMED. ANY USE OF THIS SPECIFICATION 
+		SHALL BE MADE ENTIRELY AT THE IMPLEMENTER’S OWN RISK, AND NEITHER THE CONSORTIUM, NOR 
+		ANY OF ITS MEMBERS OR SUBMITTERS, SHALL HAVE ANY LIABILITY WHATSOEVER TO ANY IMPLEMENTER 
+		OR THIRD PARTY FOR ANY DAMAGES OF ANY NATURE WHATSOEVER, DIRECTLY OR INDIRECTLY, ARISING 
+		FROM THE USE OF THIS SPECIFICATION.
+	-->
+	<!-- ******************** -->
+	<!-- ** Change History ** -->
+	<!-- ******************** -->
+	<xs:annotation>
+		<xs:documentation xml:lang="en">4 November 2002
+		Restructured the schemas that were submitted as public draft.
+		Changed the namespace.
+		
+		These elements can be inserted in other vocabularies to create dynamic content. The namespace must be maintained.
+		
+		</xs:documentation>
+	</xs:annotation>
+	
+	<!-- **************************** -->
+	<!-- ** Attribute declarations ** -->
+	<!-- **************************** -->
+	<xs:attributeGroup name="attr.property">
+		<xs:attributeGroup ref="attr.ref"/>
+		<xs:attributeGroup ref="attr.href"/>
+		<xs:attributeGroup ref="attr.view"/>
+		<xs:attributeGroup ref="attr.property-of"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.ref">
+		<xs:attribute name="ref" type="xs:IDREF"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.href">
+		<xs:attribute name="href" type="xs:anyURI"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.view">
+		<xs:attribute name="view" default="value">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="value"/>
+					<xs:enumeration value="title-value"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.property-of">
+		<xs:attribute name="property-of" default="self">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="self"/>
+					<xs:enumeration value="supported-person"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.set-property">
+		<xs:attributeGroup ref="attr.property"/>
+		<xs:attributeGroup ref="attr.transaction-type"/>
+		<xs:attributeGroup ref="attr.max-transactions"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.transaction-type">
+		<xs:attribute name="transaction-type" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.max-transactions">
+		<xs:attribute name="max-transactions" type="xs:nonNegativeInteger"/>
+	</xs:attributeGroup>
+	
+	<!-- ************************** -->
+	<!-- ** Element declarations ** -->
+	<!-- ************************** -->
+	<!-- *************************** -->
+	<!-- ** Empty with attributes ** -->
+	<!-- *************************** -->
+	<xs:element name="view-property">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.property"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="view-property-group">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.property"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="set-property" type="set-propertyType"/>
+	<xs:element name="set-property-group" type="set-propertyType"/>
+
+	<!-- ******************* -->
+	<!-- ** Complex types ** -->
+	<!-- ******************* -->
+	<xs:annotation>
+		<xs:documentation xml:lang="en">Complex type is defined for the empty elements, because notification is added in level C.</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="set-propertyType">
+		<xs:attributeGroup ref="attr.set-property"/>
+	</xs:complexType>
+</xs:schema>

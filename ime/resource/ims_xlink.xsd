@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.w3.org/1999/xlink" 
+	xmlns="http://www.w3.org/1999/xlink" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	version="IMS Xlink 1.0"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<xs:annotation>
+		<xs:documentation>
+			XSD Data File Information
+			-------------------------
+			Author:       Colin Smythe
+			Date:         30th June, 2006
+			Version:      2.0
+			Status:       Public Draft
+			Description:  This is the IMS version of the Xlink specification control XSD.
+						  This XSD supports the XML Linking Language (XLink) Version 1.0
+						  dated 27th June 2001 available at:- http://www.w3.org/TR/xlink/
+						  This was developed originally as part of the IMS CP v1.2 activity.
+						  The XLinks features supported in this XSD are:
+			
+						  (1) Arcrole -
+						  (2) Href - allows an XLink application to find a remote resource
+						  (3) Role -
+						  (4) Show -
+						  (5) Title - provision of a human readable label for the link
+						  (6) Type - 						  
+			
+			History:      This is version 2 of this XSD.  This XSD was hand-generated.
+			
+			Copyright:    2006 (c) IMS Global Learning Consortium Inc.  All Rights Reserved.
+						  IMS Global Learning Consortium, Inc. (IMS) is publishing the information
+						  contained in this binding ("Specification") for purposes of scientific
+						  experimental and scholarly collaboration only.  IMS makes no warranty or 
+						  representation regarding the accuracy or completeness of the Specification.
+						  This material is provided on an "As Is" and "As Available basis".
+						  The Specification is at all times subject to change and revision without
+						  notice. It is your sole responsibility to evaluate the usefulness, accuracy
+						  and completeness of the Specification as it relates to you.  IMS would
+						  appreciate receiving your comments and suggestions.  Please contact IMS
+						  through our website at: http://www.imsglobal.org.
+		</xs:documentation>
+	</xs:annotation>
+	
+	<xs:attribute name="arcrole" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to universal xlink:arcrole attribute.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	
+	<xs:attribute name="href" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to universal xlink:href attribute.  It is the attribute that supplies the data that allows 
+				an XLink application to find a remote resource (or resource fragment) is href. It may be used on 
+				simple-type elements, and must be used on locator-type elements.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	
+	<xs:attribute name="role" type="xs:anyURI">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to universal xlink:role attribute.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	
+	<xs:attribute name="show">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to xlink:show attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="embed"/>
+				<xs:enumeration value="new"/>
+				<xs:enumeration value="none"/>
+				<xs:enumeration value="other"/>
+				<xs:enumeration value="replace"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	
+	<xs:attribute name="title" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to universal xlink:title attribute.  Provision of a human readable label for the link.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:attribute>
+	
+	<xs:attribute name="type">
+		<xs:annotation>
+			<xs:documentation>
+				Refers to xlink:type attribute.  The XLink specification contains details for each of the enumerations.
+				When the value of the type attribute is "none", the element has no XLink-specified meaning, and any 
+				XLink-related content or attributes have no XLink-specified relationship to the element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="arc"/>
+				<xs:enumeration value="extended"/>
+				<xs:enumeration value="locator"/>
+				<xs:enumeration value="none"/>
+				<xs:enumeration value="simple"/>
+				<xs:enumeration value="title"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	
+</xs:schema>
