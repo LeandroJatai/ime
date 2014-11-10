@@ -72,7 +72,7 @@ public class ImeWorkspace implements Serializable {
 	private static org.imsglobal.jaxb.content.ObjectFactory imscpFactory = new org.imsglobal.jaxb.content.ObjectFactory();
 	private static ObjectFactory imsldFactory = new ObjectFactory();
 
-	private static final long serialVersionUID = 12345L;
+	private static final long serialVersionUID = 123456L;
 
 	//public static final int MODE_CONSTRUCTION = 1;
 	//public static final int MODE_EDITOR = 2;
