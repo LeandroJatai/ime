@@ -490,16 +490,12 @@ public class ImeWorkspace implements Serializable {
 
 		repositorio.add(ld);
 		return ld;
-
 	}
-
+	
 	public void toogleFlagTreeView(String _identifier) {
-
 		for (LdProject ld : repositorio) {
-
 			if (ld == null)
 				return;
-
 			if (ld.getIdentifier().equals(_identifier))		{	
 				ld.flagTreeView = !ld.flagTreeView;
 
