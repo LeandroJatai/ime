@@ -214,7 +214,7 @@ boolean readonly = !u.hasPermissoes("ldep.save");
 		   		    <% if (u.hasPermissoes("ldep.zip.file.lmi") && !obLdep.isAgregado()) { %><li class="list"><a class="controls-objs" href="app.do?action=ldep.zip.file.lmi&ldep=<%=obLdep.getIdentifier()%>" title="<%=u.getTexto("at.ldep.zip.lmi.titulo") %>"><b><%=u.getTexto("at.ldep.zip.lmi") %></b> - <%=u.getTexto("at.ldep.zip.lmi.msg") %></a></li><%} %>
 
 		   		    <%
-		   		 ImeObject imeO = (ImeObject) obLdep.getLd(); 
+		   		 ImeObject imeO = (ImeObject) obLdep; 
 		   		    
 		   		    if (u.hasPermissoes("ldep.zip.file.imscp") && !obLdep.isAgregado() ) { %><li class="list"><a class="controls-objs" href="app.do?action=ldep.zip.file.imscp&ldep=<%=obLdep.getIdentifier()%>" title="<%=u.getTexto("at.ldep.zip.imscp.titulo") %>"><b><%=u.getTexto("at.ldep.zip.imscp") %></b> - <%=u.getTexto("at.ldep.zip.imscp.msg") %>
 		   	

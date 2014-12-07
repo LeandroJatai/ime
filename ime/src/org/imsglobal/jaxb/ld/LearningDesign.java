@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -31,7 +32,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 
+
 import br.edu.ifg.ime.ld.ImeObject;
+import br.edu.ifg.ime.ld.LdProject;
 
 
 /**
@@ -97,6 +100,7 @@ public class LearningDesign extends ImeObject   implements Serializable
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID
 	protected String identifier;
+
 
 	//INCLUSÃO EXTRA
 	@XmlAttribute(name = "inherit-roles")
@@ -386,19 +390,22 @@ public class LearningDesign extends ImeObject   implements Serializable
 		// OK
 		clearStructureOfValidationMessages();
 
-		if (uri == null || uri.length() == 0) {
-			uri = null;
-			putERROR("*A URI do Modelo Instrucional não foi informada.");
-		}
-		else if (uri != null && uri.length() > 0) {
-			URL u = null;
-			try {  
-				u = new URL(uri);  
-				u.toURI();  
-			} 
-			catch (Exception e) {  
-				putWARNING("*Sintaxe da URI do Modelo Instrucional mal informada.");
-			}  
+
+		if (parent.parent == null) {
+			if (uri == null || uri.length() == 0) {
+				uri = null;
+				putERROR("*A URI do Modelo Instrucional não foi informada.");
+			}
+			else if (uri != null && uri.length() > 0) {
+				URL u = null;
+				try {  
+					u = new URL(uri);  
+					u.toURI();  
+				} 
+				catch (Exception e) {  
+					putWARNING("*Sintaxe da URI do Modelo Instrucional mal informada.");
+				}  
+			}
 		}
 
 		if (title == null || title.length() == 0)
@@ -412,7 +419,7 @@ public class LearningDesign extends ImeObject   implements Serializable
 			putERRORs(prerequisites.getERRORs());
 			putWARNINGs(prerequisites.getWARNINGs());
 		}
-		
+
 		if (learningObjectives != null && learningObjectives.isEmpty()) {
 			learningObjectives = null;
 		} else if (learningObjectives != null)   {

@@ -65,7 +65,7 @@
 		
 		
 		   		    <%
-		   		 ImeObject imeO = (ImeObject) ldep.getLd(); 
+		   		 ImeObject imeO = (ImeObject) ldep; 
 		   		    
 		   		    if (u.hasPermissoes("ldep.zip.file.imscp") && !ldep.isAgregado() ) { %><li class="list"><a class="controls-objs" href="app.do?action=ldep.zip.file.imscp&ldep=<%=ldep.getIdentifier()%>" title="<%=u.getTexto("at.ldep.zip.imscp.titulo") %>"><b><%=u.getTexto("at.ldep.zip.imscp") %></b> - <%=u.getTexto("at.ldep.zip.imscp.msg") %>
 		   	

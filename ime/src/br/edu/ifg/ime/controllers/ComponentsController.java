@@ -39,6 +39,7 @@ public class ComponentsController {
 		if (ld.getComponents() == null) {
 			ld.setComponents(new Components());
 		}
+		ld.getComponents().parent = ld;
 		return ld.getComponents();		
 	}
 

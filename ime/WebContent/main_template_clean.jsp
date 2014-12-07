@@ -14,8 +14,8 @@
 <script type="text/javascript" src="<%=Urls.urlAppBase%>js/jquery.caret.1.02.js"></script>
 <script type="text/javascript" src="<%=Urls.urlAppBase%>js/jquery-ui-1.10.3.custom.min.js"></script>
 
-<script type="text/javascript" src="<%=Urls.urlAppBase%>js/lib.js"></script>
-<link rel="stylesheet" href="<%=Urls.urlAppBase%>css/lib.css">
+<script type="text/javascript" src="<%=Urls.urlAppBase%>js/ime.js"></script>
+<link rel="stylesheet" href="<%=Urls.urlAppBase%>css/ime.css">
 
 <link rel="shortcut icon" href="<%=Urls.urlAppBase%>image/1.jpg" >
 

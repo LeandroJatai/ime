@@ -118,7 +118,7 @@ if (u == null)
 	</a>  
 	
 	
-             <% imeO = (ImeObject) ld;  %>
+             <% imeO = (ImeObject) ldep;  %>
             <%@include file="../../../admin/iconsValidateImsLd.jsp"%>
               
 		    

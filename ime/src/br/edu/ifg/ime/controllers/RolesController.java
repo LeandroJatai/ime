@@ -73,6 +73,7 @@ public class RolesController {
 			if (tipo.equals("learner")) {
 
 				Learner learner = new Learner();
+				learner.parent = roles;
 
 				learner.setTitle(titulo);
 				learner.setIdentifier(ImeWorkspace.getImeWorkspace(request).newIdentifier(learner, tipo));
@@ -87,6 +88,7 @@ public class RolesController {
 			}
 			else if (tipo.equals("staff")) {
 				Staff staff = new Staff();
+				staff.parent = roles;
 
 				staff.setTitle(titulo);
 				staff.setIdentifier(ImeWorkspace.getImeWorkspace(request).newIdentifier(staff, tipo));
@@ -142,7 +144,7 @@ public class RolesController {
 				if (learner.getIdentifier().equals(identifier))
 					return learner;
 			}	
-				ldep = ldep.parent;
+				ldep = (LdProject)ldep.parent;
 		
 		}
 		return null;
@@ -161,7 +163,7 @@ public class RolesController {
 					return staff;
 			}			
 
-				ldep = ldep.parent;
+				ldep = (LdProject)ldep.parent;
 			
 		}
 		return null;
@@ -179,10 +181,15 @@ public class RolesController {
 
 		while (ldep != null) {
 
-				result.add((ArrayList<Learner>) getRoles(ldep).getLearnerList());
-
+				Roles roles = getRoles(ldep);
+				ArrayList<Learner> rLearners = (ArrayList<Learner>) getRoles(ldep).getLearnerList();
+				for (Learner l: rLearners)
+					l.parent = roles;				
+				
+				result.add(rLearners);
+				
 			if (ldep.getLd().getInheritRoles() != null && ldep.getLd().getInheritRoles())
-				ldep = ldep.parent;
+				ldep = (LdProject)ldep.parent;
 			else
 				break;
 		}		
@@ -195,10 +202,14 @@ public class RolesController {
 
 		while (ldep != null) {
 
-			getRoles(ldep);
-				result.add((ArrayList<Learner>) getRoles(ldep).getLearnerList());
-
-			ldep = ldep.parent;
+			Roles roles = getRoles(ldep);
+			ArrayList<Learner> rLearners = (ArrayList<Learner>) getRoles(ldep).getLearnerList();
+			for (Learner l: rLearners)
+				l.parent = roles;				
+			
+			result.add(rLearners);
+			
+			ldep = (LdProject)ldep.parent;
 		}		
 		return result;
 	}
@@ -217,11 +228,15 @@ public class RolesController {
 
 		while (ldep != null) {
 
-			getRoles(ldep);
-				result.add((ArrayList<Staff>) getRoles(ldep).getStaffList());
-
+			Roles roles = getRoles(ldep);
+			ArrayList<Staff> rStaffs = (ArrayList<Staff>) getRoles(ldep).getStaffList();
+			for (Staff s: rStaffs)
+				s.parent = roles;				
+			
+			result.add(rStaffs);
+			 
 			if (ldep.getLd().getInheritRoles() != null && ldep.getLd().getInheritRoles())
-				ldep = ldep.parent;
+				ldep = (LdProject)ldep.parent;
 			else
 				break;
 		}
@@ -232,10 +247,14 @@ public class RolesController {
 
 		while (ldep != null) {
 
-			getRoles(ldep);
-				result.add((ArrayList<Staff>) getRoles(ldep).getStaffList());
-
-			ldep = ldep.parent;
+			Roles roles = getRoles(ldep);
+			ArrayList<Staff> rStaffs = (ArrayList<Staff>) getRoles(ldep).getStaffList();
+			for (Staff s: rStaffs)
+				s.parent = roles;				
+			
+			result.add(rStaffs);
+			
+			ldep = (LdProject)ldep.parent;
 
 		}
 		return result;
@@ -256,7 +275,8 @@ public class RolesController {
 		if (componentes.getRoles() == null) {
 			componentes.setRoles(new Roles());
 		}
-
+		componentes.getRoles().parent = componentes;
+		
 		return componentes.getRoles();		
 	}
 

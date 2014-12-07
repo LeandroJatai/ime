@@ -31,10 +31,10 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 
 	private String identifier; 
 
-	@XmlElement(name="learning-design")
+	//@XmlElement(name="learning-design")
 	private LearningDesign ld = new LearningDesign();
 
-	@XmlElement(name="ld-editor-project")
+	//  #@XmlElement(name="ld-editor-project")
 	public List<LdProject> ldAgregados = new ArrayList<LdProject>();
 
 	@XmlTransient
@@ -46,8 +46,6 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 	@XmlTransient
 	public ImeWorkspace workspace = null;
 
-	@XmlTransient
-	public LdProject parent = null;
 
 	private List<String> undo = new ArrayList<String>();
 	private List<String> redo = new ArrayList<String>();
@@ -61,6 +59,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 	public boolean flagAlterado = true;
 
 	public LdProject() {
+		ld.parent = this;
 	}
 
 	public LdProject(ImeWorkspace works) {
@@ -71,7 +70,8 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		ld.setTitle("MI - Sem Título "+(workspace.countNewProject++));
 		ld.setLevel("A");
 		ld.setIdentifier(workspace.newIdentifier(ld, "ld"));
-		
+		ld.parent = this;
+
 		ComponentsController.getComponents(this);
 		MethodController.getMethod(this);
 		//ld.setInheritRoles(false);
@@ -92,7 +92,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		agregarLd(this);
 	}
 	public LearningDesign getLd() {	
-
+		ld.parent = this;
 		return ld;
 	}
 
@@ -139,7 +139,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 			return;
 
 		ldep.agregadoON(this);
- 
+
 		ldAgregados.add(ldep);
 
 	}
@@ -199,8 +199,8 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		ld.setUri(uri);
 		ld.setVersion(version);
 		ld.setInheritRoles(inheritRoles != null? true: null);
-		
-	//	ld.validateImsLd();
+
+		//	ld.validateImsLd();
 	}
 
 	public Collection<Item> getAllItemsWithOutItemsSubProjects() {
@@ -236,9 +236,9 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 				Item item = (Item) ob;
 
 				items.add(item);
-				
 
-				
+
+
 			}
 
 		}
@@ -289,7 +289,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 
 				//Resource r = (Resource) item.getIdentifierref();
 				//r.setIdentifier(workspace.newIdentifier(r, "resource")); 
-				
+
 				resources.getResourceList().add((Resource) item.getIdentifierref());
 			}
 		}
@@ -310,12 +310,12 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 				continue;
 
 			Resource r = (Resource) item.getIdentifierref();
-			
-		//	r.setIdentifier(workspace.newIdentifier(r, "resource"));  
-			
+
+			//	r.setIdentifier(workspace.newIdentifier(r, "resource"));  
+
 			if (r.getFileList() == null || r.getFileList().size() == 0) {
 
-				
+
 				if (r.getHref() != null && r.getHref().equals(nameFile)) {
 					r.setHref(r.getHref().replaceAll(" (", "-"));
 					r.setHref(r.getHref().replaceAll("(", "-"));
@@ -338,13 +338,13 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 
 
 			if (r.getFileList().get(0).getHref() != null && r.getFileList().get(0).getHref().equals(nameFile)) {
-				
+
 				r.getFileList().get(0).setHref(r.getFileList().get(0).getHref().replaceAll(" \\(", "-"));
 				r.getFileList().get(0).setHref(r.getFileList().get(0).getHref().replaceAll("\\(", "-"));
 				r.getFileList().get(0).setHref(r.getFileList().get(0).getHref().replaceAll("\\)", ""));
 				r.setHref(r.getFileList().get(0).getHref());
-				
-				
+
+
 				boolean isTexto = Suport.isByteArrayIsFileText(data);
 
 
@@ -377,7 +377,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		LdProject ldep = this;
 
 		while (ldep.parent != null)
-			ldep = ldep.parent;
+			ldep = (LdProject)ldep.parent;
 
 		return ldep.undo.size(); 
 	}
@@ -387,7 +387,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		LdProject ldep = this;
 
 		while (ldep.parent != null)
-			ldep = ldep.parent;
+			ldep = (LdProject)ldep.parent;
 
 		if (ldep.undo.size() == 0)
 			return;
@@ -410,7 +410,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		LdProject ldep = this;
 
 		while (ldep.parent != null)
-			ldep = ldep.parent;
+			ldep = (LdProject)ldep.parent;
 
 		return ldep.redo.size(); 
 	}
@@ -420,7 +420,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		LdProject ldep = this;
 
 		while (ldep.parent != null)
-			ldep = ldep.parent;
+			ldep = (LdProject)ldep.parent;
 
 		if (ldep.redo.size() == 0)
 			return;
@@ -444,7 +444,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 		LdProject ldep = this;
 
 		while (ldep.parent != null)
-			ldep = ldep.parent;
+			ldep = (LdProject)ldep.parent;
 		ldep.flagAlterado = true;
 
 		ldep.undo.add(  workspace.getCodeIMSCPOfLdepProject(ldep.getIdentifier())  );
@@ -465,12 +465,28 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 
 	@Override
 	public void validateImsLd() {
-		
+
 		clearStructureOfValidationMessages();
-		
-		if (ld != null)
-			ld.validateImsLd(); 
-		
+
+		if (ld != null) {
+			ld.validateImsLd();
+			putERRORs(ld.getERRORs());
+			putWARNINGs(ld.getWARNINGs());
+		}
+		if (ldAgregados != null)
+			for (LdProject ldep: ldAgregados) {
+				ldep.validateImsLd();
+				for (int i = 0; i < ldep.getERRORs().size(); i++) {
+					ldep.getERRORs().set(i, ldep.getLd().getTitle()+": "+ldep.getERRORs().get(i));
+				}
+				for (int i = 0; i < ldep.getWARNINGs().size(); i++) {
+					ldep.getWARNINGs().set(i, ldep.getLd().getTitle()+": "+ldep.getWARNINGs().get(i));
+				}
+					
+				putERRORs(ldep.getERRORs());
+				putWARNINGs(ldep.getWARNINGs());
+			}
+
 	}
 
 }

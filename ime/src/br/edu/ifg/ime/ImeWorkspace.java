@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.io.Writer;
 import java.lang.reflect.Field; 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,6 +63,7 @@ import br.edu.ifg.ime.suport.Urls;
 import br.edu.ifg.ime.suport.xsd.SimpleResolver;
 import br.edu.ifg.ime.test.ImeTest;
 
+import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
 import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
 
 public class ImeWorkspace implements Serializable {
@@ -559,6 +561,7 @@ public class ImeWorkspace implements Serializable {
 
 		ldep.setIdentifier(m.getIdentifier());
 		ldep.setLd(((JAXBElement<LearningDesign>) m.getOrganizations().getAny().get(0)).getValue());
+		ldep.getLd().parent = ldep;
 
 		for (Resource r: m.getResources().getResourceList()) {
 			r.setIdentifier(this.newIdentifier(r, "resource"));  
@@ -670,7 +673,19 @@ public class ImeWorkspace implements Serializable {
 
 		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
+ 
+        marshaller.setProperty(CharacterEscapeHandler.class.getName(),
+                new CharacterEscapeHandler() {
+					 
+                    @Override
+                    public void escape(char[] ac, int i, int j, boolean flag,
+                            Writer writer) throws IOException {
+                        writer.write(ac, i, j);
+                    }
+                });
+       
+		
+		
 		NamespacePrefixMapper mapper = new NamespacePrefixMapper() {
 
 			@Override
@@ -829,6 +844,7 @@ private boolean registrarObjetos(Object obImport, Object parent) throws Exceptio
 				return false;				
 
 			ldep.setLd(((JAXBElement<LearningDesign>) m.getOrganizations().getAny().get(0)).getValue());
+			ldep.getLd().parent = ldep;
 
 			for (Resource r: m.getResources().getResourceList()) {
 				registrarObjetos(r, ldep);
@@ -1478,13 +1494,13 @@ private boolean registrarObjetos(Object obImport, Object parent) throws Exceptio
 
 
 			// parent(MI anterior) ao qual o MI atual está vinculado.
-			LdProject parent = ldep.parent;
+			LdProject parent = (LdProject)ldep.parent;
 
 
 			//Geral uma clone do projeto principal a fim de replicar o parent(MI anterior)
 			LdProject raiz = ldep; 
 			while (raiz.parent != null) 
-				raiz = raiz.parent;  
+				raiz = (LdProject)raiz.parent;  
 			LdProject cloneRaiz = this.clonarLdep(raiz);
 
 
@@ -1592,7 +1608,7 @@ private boolean registrarObjetos(Object obImport, Object parent) throws Exceptio
 
 			//Caso exista apenas um Play no MI atual, todos os seus Acts são integrados no MI Parent.
 			List<Act> lActs = PlaysController.getPlays( ldep ).get(0).getActList();
-			ldep.parent.getLdAgregados().remove(ldep);
+			((LdProject)ldep.parent).getLdAgregados().remove(ldep);
 			this.repositorio.remove(ldep);
 
 			int iAct = 0;

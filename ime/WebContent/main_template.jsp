@@ -38,7 +38,7 @@ if ((obLdep = w.getLdProjectByIdentifier(ldep)) == null) {
 }
 else {
 	while (obLdep.parent != null)
-		obLdep = obLdep.parent;
+		obLdep = (LdProject)obLdep.parent;
 	
 	if (obLdep.skin == null || obLdep.skin.length() == 0)
 	    out.write(new String(ArquivoController.getBytesArquivo("/_skins/ime.skin")));

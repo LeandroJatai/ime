@@ -85,6 +85,7 @@ public class Item
     protected Metadata metadata;
     @XmlAnyElement(lax = true)
     protected List<Object> any;
+    
     @XmlAttribute(required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID

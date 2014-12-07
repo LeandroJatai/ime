@@ -284,10 +284,10 @@ public class AppBaseServlet extends HttpServlet {
 			try {
 
 
-				LearningDesign ld = w.getLdProjectByIdentifier(ldep).getLd();
-				ld.validateImsLd();
+				LdProject ldProject = w.getLdProjectByIdentifier(ldep);
+				ldProject.validateImsLd();
 				
-				if (Suport.existErrorIn(ld)) {
+				if (Suport.existErrorIn(ldProject)) {
 					Urls.forward(request, response, "Verifique os erros abaixo!", "views/ldep/ldep.edit.jsp");		
 					return;
 				}

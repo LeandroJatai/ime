@@ -147,10 +147,10 @@ implements Serializable
 	}
 
 	public void validateImsLd() {
-		
+
 		clearStructureOfValidationMessages();
 
-		
+
 		if (getLearnerList().size() > 0)
 			for (Learner learner : getLearnerList()) {	
 				if (learner != null) {
@@ -159,8 +159,10 @@ implements Serializable
 					putWARNINGs(learner.getWARNINGs());
 				}
 			}
-		else 
-			putERROR("*Deve existir ao menos um papel aprendiz cadastrado.");
+		       //Roles.Components.LearningDesign.LDProject.LDProject // Ou seja testa se não é uma composição
+		else if (this.parent.parent.parent.parent == null)
+			putERROR("*Deve existir ao menos um papel aprendiz registrado...");
+
 
 		for (Staff staff : getStaffList()) {	
 			if (staff != null) {

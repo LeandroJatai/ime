@@ -170,8 +170,8 @@ public class Components extends ImeObject
 			roles.validateImsLd();
 			putERRORs(roles.getERRORs());
 			putWARNINGs(roles.getWARNINGs());
-		}
-		else 
+		}    //Components.LearningDesign.LDProject.LDProject // Ou seja testa se não é uma composição
+		else if (this.parent.parent.parent == null)
 			putERROR("*Deve existir ao menos um papel aprendiz registrado...");
 
 		

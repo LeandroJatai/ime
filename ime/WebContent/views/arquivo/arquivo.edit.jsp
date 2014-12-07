@@ -25,7 +25,7 @@ Usuario u = UsuarioController.getUsuarioConectado(session);
 	%>
 <div id="LeftPane">
 
-<span style="font-size: 90%; color: #776;">Lista as notas no final da lista de arquivos.</span>
+<span style="font-size: 90%; color: #776;">Veja as notas no final da lista de arquivos.</span>
 	
 <fieldset id="usuariosList">
 	<legend><%=u.getTexto("ime.arquivo.leg") %></legend>

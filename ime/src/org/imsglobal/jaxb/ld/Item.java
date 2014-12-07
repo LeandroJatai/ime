@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import br.edu.ifg.ime.ld.ImeObject;
+import br.edu.ifg.ime.suport.xsd.AdaptadorCDATA;
 
 
 /**
@@ -93,8 +94,8 @@ implements Serializable
 
 	@XmlInlineBinaryData()
 	private String link = null;
-
-	@XmlInlineBinaryData()
+	
+	@XmlJavaTypeAdapter(AdaptadorCDATA.class)
 	private String text = null;
 
 	public String getType() {

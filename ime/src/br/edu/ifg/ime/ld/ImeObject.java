@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 import javax.xml.bind.annotation.XmlTransient;
  
-public abstract class ImeObject {
+public abstract class ImeObject  {
 
 	final public static String ERROR = "ERROR:";
 	final public static String WARNING = "WARNING:";
@@ -17,6 +17,10 @@ public abstract class ImeObject {
 
 	@XmlTransient
 	private long id = 0;
+
+	// TODO: Implementar associação parents em todos os elementos que extendem de ImeObject
+	@XmlTransient
+	public ImeObject parent = null;
 	
 	@XmlTransient
 	private TreeMap<String, List<String>> validationMessages = null;
