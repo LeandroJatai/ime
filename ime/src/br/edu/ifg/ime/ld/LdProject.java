@@ -30,7 +30,7 @@ public class LdProject extends ImeObject implements Serializable, ImeProject {
 	private static final long serialVersionUID = 12345L;
 
 	private String identifier; 
-
+        //teste de atualização
 	//@XmlElement(name="learning-design")
 	private LearningDesign ld = new LearningDesign();
 
